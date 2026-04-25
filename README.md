@@ -63,6 +63,13 @@ start index.html        # Windows
 open index.html         # macOS
 xdg-open index.html     # Linux
 ```
+
+### Live Deployment 
+
+```bash
+https://wajza.github.io/WajdAlghamdi/
+```
+
 ---
 ## 🛠️ Technologies Used
 
