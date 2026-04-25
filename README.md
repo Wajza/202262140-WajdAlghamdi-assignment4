@@ -2,38 +2,43 @@
 
 <div align="center">
   
-  **Student ID: 202262140 | Assignment 3 – Advanced Functionality**
+  **Student ID: 202262140 | Assignment 4 – Final Personal Web Application**
   
-  *A feature-rich portfolio website with GitHub API integration, interactive quiz, and state management*
+    *A fully polished, feature-rich portfolio website with GitHub API integration, interactive quiz, journey timeline, and state management*
+
 </div>
 
 ---
 
 ## 📋 Project Description
 
-This is a personal portfolio website that showcases my software engineering work. The project demonstrates advanced web development skills including API integration, complex logic implementation, state management, and performance optimization.
+This is my complete personal portfolio website showcasing my journey as a Software Engineer. The project demonstrates advanced web development skills including API integration, complex logic implementation, state management, performance optimization, and innovative features that represent my personal brand.
 
 ### Features Implemented
 
 | Feature | Description | Status |
 |---------|-------------|--------|
-| **API Integration** | Fetches live GitHub repositories using GitHub REST API | ✅ |
-| **Complex Logic** | Combined filter + sort functionality for GitHub repos + Interactive Developer Quiz | ✅ |
-| **State Management** | Persistent dark/light mode, visit counter, session timer, quiz results | ✅ |
-| **Performance** | Lazy loading images, debounced events, optimized CSS animations | ✅ |
-| **Responsive Design** | Works on desktop, tablet, and mobile devices | ✅ |
-| **Form Validation** | Real-time validation with user-friendly error messages | ✅ |
+| **GitHub API Integration** | Fetches live GitHub repositories with filter & sort | ✅ |
+| **Developer Quiz** | Interactive quiz to find your developer path | ✅ |
+| **State Management** | Visit counter, session timer, theme persistence | ✅ |
+| **Journey Timeline** | Personal growth timeline with hover effects | ✅ |
+| **Quote Rotator** | Auto-rotating personal quotes with navigation | ✅ |
+| **Responsive Design** | Works perfectly on desktop, tablet, and mobile | ✅ |
+| **Dark/Light Theme** | Persistent theme switching with system preference | ✅ |
+| **Form Validation** | Real-time validation with friendly error messages | ✅ |
 
 ### Portfolio Sections
 
-1. **Hero Section** - Introduction with dynamic time-based greeting
-2. **About Me** - Professional background and education
-3. **Skills** - Technical competencies with animated progress bars
-4. **Projects** - Showcase of 3 software engineering projects with filters
-5. **GitHub Repositories** - Live API integration with filter & sort
-6. **Developer Quiz** - Interactive quiz to find your developer path
-7. **Contact Form** - Validated contact form with submission simulation
-8. **Stats Bar** - Visit counter and session timer (state management)
+1. **Stats Boxes** - Visit counter, session timer, GitHub repo count
+2. **Hero Section** - Introduction with dynamic time-based greeting
+3. **About Me** - Professional background and education
+4. **My Tech Journey** - Interactive timeline with personal milestones and rotating quotes
+5. **Skills** - Technical competencies with animated progress bars
+6. **Projects** - Showcase of software engineering projects with filters
+7. **GitHub Repositories** - Live API integration with filter by language & sort
+8. **Developer Quiz** - Interactive quiz to find your developer path
+9. **Contact Form** - Validated contact form with submission simulation
+10. **Footer** - Quick links and newsletter subscription
 
 ---
 
@@ -48,10 +53,10 @@ This is a personal portfolio website that showcases my software engineering work
 
 ```bash
 # Clone the repository
-git clone https://github.com/Wajza/202262140-wajd-alghamdi-assignment3.git
+git clone https://github.com/Wajza/202262140-wajd-alghamdi-assignment4.git
 
 # Navigate into the project folder
-cd 202262140-wajd-alghamdi-assignment3
+cd 202262140-wajd-alghamdi-assignment4
 
 # Open index.html in your browser (double-click or use command below)
 start index.html        # Windows
@@ -59,22 +64,26 @@ open index.html         # macOS
 xdg-open index.html     # Linux
 ```
 ---
-## Technologies Used
-- HTML5
-- CSS 
-- JavaScript 
-- Font Awesome Icons
-- Google Fonts
-- GitHub REST API
+## 🛠️ Technologies Used
+
+| Category | Technologies |
+|----------|--------------|
+| **Frontend** | HTML5, CSS3, JavaScript (ES6+) |
+| **Styling** | CSS Variables, Flexbox, Grid, Animations |
+| **Icons** | Font Awesome 6 |
+| **Typography** | Google Fonts (Poppins) |
+| **API** | GitHub REST API |
+| **Storage** | localStorage, sessionStorage |
+| **Deployment** | GitHub Pages |
 
 ## AI Tools Used
 This project was developed with assistance from:
 - **ChatGPT**: Code generation, debugging, and documentation
 
 ## AI Contribution Summary
-- Code Generation: Initial structure for GitHub API integration, quiz logic, and state management
-- Debugging: Helped identify and fix filter/sort combination logic issues
-- Code Review: Reviewed existing portfolio code and suggested performance optimizations
-- Documentation: Assisted in structuring technical documentation
+- Code generation for GitHub API, quiz logic, state management
+- Debugging filter/sort logic issues
+- Code review and performance optimization suggestions
+- Documentation structure assistance
 
 For detailed AI usage documentation, see [docs/ai-usage-report.md](docs/ai-usage-report.md)

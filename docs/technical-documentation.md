@@ -4,232 +4,192 @@
 
 ## Introduction
 
-**Purpose:**
-This technical documentation provides a comprehensive overview of the Wajd Alghamdi Portfolio website for Assignment 3. It is intended for developers who need to understand, maintain, or extend the codebase, specifically the advanced features added for this assignment.
+### Purpose
+This document provides a comprehensive technical overview of the portfolio website for developers who need to understand, maintain, or extend the codebase.
 
-**Project Overview:**
-A responsive personal portfolio website built with vanilla HTML, CSS, and JavaScript. The site showcases software engineering projects, technical skills, and provides advanced features including GitHub API integration, an interactive developer quiz, real-time stats bar, and combined filter+sort functionality.
-
----
-
-## Key Features
-
-1. GitHub API Integration
-2. Filter + Sort Logic
-3. Interactive Developer Quiz
-4. Stats Bar
-5. Dark/Light Theme
-6. Responsive Design
-7. Form Validation
-8. Project Filtering
-9. Animated Skill Bars
+### Project Overview
+A responsive personal portfolio website built with vanilla HTML, CSS, and JavaScript. Features include GitHub API integration, interactive developer quiz, journey timeline, quote rotator, and state management (localStorage/sessionStorage).
 
 ---
 
 ## System Architecture
 
--  Frontend Stack:
+### Frontend Stack
 
-| Layer | Technology | File | Key Features |
-|-------|------------|------|--------------|
-| 📄 Structure | HTML5 | index.html | Semantic structure, SEO-friendly tags, ARIA accessibility, GitHub section, quiz container, stats bar |
-| 🎨 Styling | CSS3 | styles.css | CSS Variables for theming, Flexbox & Grid layouts, media queries, keyframe animations, GitHub repo cards, quiz styles, stats bar |
-| ⚡ Functionality | JavaScript | script.js | DOM manipulation, GitHub API fetch, filter+sort logic, quiz scoring, localStorage/sessionStorage, event listeners |
+| Layer | Technology | Files | Key Features |
+|-------|------------|-------|--------------|
+| Structure | HTML5 | index.html | Semantic elements, ARIA labels, SEO tags |
+| Styling | CSS3 | styles.css | CSS variables, Grid/Flexbox, animations |
+| Logic | JavaScript ES6+ | script.js | API calls, DOM manipulation, state management |
 
-- Browser APIs:
+### Browser APIs Used
 
 | API | Function | Implementation |
 |-----|----------|----------------|
-| LocalStorage | Persistent state management | Saves theme preference, visit count, quiz results |
-| sessionStorage | SSession state management | Tracks session start time for timer |
-| Intersection Observer | Scroll-triggered animations | Animates skill bars when scrolled into view |
-| Fetch API | GitHub API calls | Fetches repositories |
-| DOM API | Element manipulation | Selects and modifies page elements dynamically |
-| History API | Smooth navigation | Handles anchor link scrolling without page reload |
+| localStorage | Persistent storage | Theme, visit count, quiz results |
+| sessionStorage | Session storage | Session timer, current quote index |
+| Fetch API | HTTP requests | GitHub API calls |
+| Intersection Observer | Scroll animations | Skill bars, timeline items |
+| History API | Navigation | Smooth scroll with URL updates |
 
-- External Resources:
+## External Resources
 
-| Resource | Icon | Type | Usage |
-|----------|------|------|-------|
-| Google Fonts | 🔤 | Typography | Main font family for all text |
-| Font Awesome | 🎯 | Icons | UI icons for navigation, skills, GitHub meta, social links |
+| Resource | Usage |
+|----------|-------|
+| Google Fonts (Poppins) | Typography |
+| Font Awesome 6 | Icons |
+| GitHub REST API | Repository data |
 
 ---
 
 ## File Structure
 
-| Directory | File | Description |
-|-----------|------|-------------|
-| / | README.md | Project overview and setup instructions |
-| / | index.html | Main entry point / Homepage |
-| /css/ | styles.css | All styling and themes |
-| /js/ | script.js | All JavaScript functionality |
-| /assets/images/ | PFP.png | Profile picture |
-| /assets/images/ | KSIH.png | KFUPM Student Impact Hub project image |
-| /assets/images/ | EBS.png | Event Booking System project image |
-| /assets/images/ | KE.png | KFUPM Events project image |
-| /docs/ | ai-usage-report.md | AI usage documentation |
-| /docs/ | technical-documentation.md | Technical documentation |
+202262140-wajd-alghamdi-assignment4/
+├── README.md # Project overview
+├── index.html # Main entry point
+├── css/
+│ └── styles.css # All styling
+├── js/
+│ └── script.js # All JavaScript
+├── assets/
+│ └── images/
+│ ├── PFP.png # Profile picture
+│ ├── KSIH.png # Project 1 image
+│ ├── EBS.png # Project 2 image
+│ └── KE.png # Project 3 image
+├── docs/
+│ ├── ai-usage-report.md # AI documentation
+│ └── technical-documentation.md # This file
+├── presentation/
+│ ├── slides.pdf # Presentation slides
+│ └── demo-video.mp4 # Video demo
+└── .gitignore
 
 ---
 
 ## Component Documentation
 
-1. Navigation Component:  index.html (lines 18-55) | styles.css (lines 84-170) | script.js (lines 38-108):
+1. Navigation Component:
+**Location:** `index.html` (lines 18-55) | `styles.css` (lines 84-170) | `script.js` (lines 38-108)
 
-- HTML:
-```html
-<!--
-<nav class="navbar" aria-label="Main navigation">
-    <div class="nav-container">
-        <div class="logo">
-            <a href="#home">Wajd Alghamdi</a>
-        </div>
-        <button class="hamburger" aria-label="Toggle menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button>
-        <ul class="nav-menu">
-            <li><a href="#home" class="nav-link">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#projects" class="nav-link">Projects</a></li>
-            <li><a href="#skills" class="nav-link">Skills</a></li>
-            <li><a href="#github-repos" class="nav-link">GitHub</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-        <div class="theme-toggle">
-            <button id="themeToggle"><i class="fas fa-moon"></i></button>
-        </div>
-    </div>
-</nav>
--->
+**Features:**
+- Fixed position with backdrop blur
+- Responsive hamburger menu on mobile
+- Active link highlighting (scroll spy)
+- Keyboard and swipe gesture support
+
+**Key Classes:**
+```css
+.navbar        /* Fixed navigation bar */
+.nav-menu      /* Desktop menu */
+.hamburger     /* Mobile menu button */
+.nav-link      /* Individual links */
 ```
 
-2. Stats Bar Component: index.html (lines 57-72) | styles.css (lines 350-380) | script.js (lines 650-680):
+2. Stats Boxes Component:
+**Location:** `index.html` (lines 57-83) | `styles.css` (stats-boxes section) | `script.js` (initVisitCounter, initSessionTimer)
 
-- HTML:
-```html
-<!--
-<div class="stats-bar" id="statsBar">
-    <div class="stats-container">
-        <div class="stat-item">
-            <i class="fas fa-user-friends"></i>
-            <span id="visitCount">Loading...</span>
-            <small>Total Visits</small>
-        </div>
-        <div class="stat-item">
-            <i class="fas fa-clock"></i>
-            <span id="sessionTimer">0s</span>
-            <small>Session Duration</small>
-        </div>
-        <div class="stat-item">
-            <i class="fas fa-code-branch"></i>
-            <span id="repoCount">0</span>
-            <small>GitHub Repos</small>
-        </div>
-    </div>
-</div>
--->
+**Features:**
+- Displays visit count, session timer, GitHub repo count
+- Glass morphism effect
+- Hover animation
+- Responsive sizing
+
+**Key Classes:**
+```css
+.stats-boxes        /* Container */
+.stats-boxes-grid   /* Flex layout */
+.stats-box          /* Individual card */
+.stats-box-number   /* Value display */
+.stats-box-label    /* Label text */
 ```
+3. GitHub Repositories Component
+**Location:** `index.html` (lines 200-230) | `styles.css` (github-section) | `script.js` (fetchGitHubRepos, filterAndSortRepos)
 
-3. GitHub Repositories Section: index.html (lines 200-230) | styles.css (lines 500-600) | script.js (lines 700-800):
+**Features:**
+- Fetches live data from GitHub API
+- Dynamic language filter
+- Sort by stars, name, or recent
+- Error handling with retry button
 
-- HTML:
-```html
-<!--
-<section id="github-repos" class="github-section">
-    <div class="container">
-        <h2 class="section-title">My GitHub Projects</h2>
-        <div class="github-controls">
-            <div class="repo-filter-group">
-                <label for="repoFilter">Filter by Language:</label>
-                <select id="repoFilter">
-                    <option value="all">All Languages</option>
-                </select>
-            </div>
-            <div class="repo-sort-group">
-                <label for="repoSort">Sort by:</label>
-                <select id="repoSort">
-                    <option value="updated">Most Recent</option>
-                    <option value="stars">Most Stars</option>
-                    <option value="name">Name</option>
-                </select>
-            </div>
-        </div>
-        <div id="reposContainer" class="repos-grid"></div>
-    </div>
-</section>
--->
+**Key Classes:**
+```javascript
+fetchGitHubRepos()      // API call
+populateLanguageFilter() // Dynamic dropdown
+displayRepos()          // Render cards
+filterAndSortRepos()    // Combined logic
 ```
+4. Developer Quiz Component
+**Location:** `index.html` (lines 232-260) | `styles.css` (quiz-section) | `script.js` (quiz functions)
 
-4.  Developer Quiz Section: index.html (lines 232-260) | styles.css (lines 620-700) | script.js (lines 820-920):
+**Features:**
+- 3 questions with 4 options each
+- Weighted scoring system
+- Progress bar
+- LocalStorage result saving
 
-- HTML:
-```html
-<!--
-<section id="skill-quiz" class="quiz-section">
-    <div class="container">
-        <h2 class="section-title">Find Your Developer Match</h2>
-        <div class="quiz-container">
-            <div class="quiz-intro" id="quizIntro">
-                <p>Answer a few questions to see which developer path suits you best!</p>
-                <button id="startQuizBtn" class="cta-button">Start Quiz →</button>
-            </div>
-            <div id="quizContent" style="display: none;">
-                <div id="quizQuestion" class="quiz-question"></div>
-                <div id="quizOptions" class="quiz-options"></div>
-                <div id="quizProgress" class="quiz-progress"></div>
-            </div>
-            <div id="quizResult" style="display: none;" class="quiz-result"></div>
-        </div>
-    </div>
-</section>
--->
+**Key Classes:**
+```javascript
+initQuiz()       // Initialize quiz
+showQuestion()   // Display current question
+showQuizResult() // Calculate and show result
+restartQuiz()    // Reset quiz
 ```
+5. Journey Timeline Component
+**Location:** `index.html` (my-journey section) | `styles.css`  (journey-section) | `script.js` (timeline functions)
 
-5.  Contact Form Component: index.html (lines 262-310) | styles.css (lines 720-820) | script.js (lines 150-200):
+**Features:**
+- 6 personal milestones (2023-2026)
+- Scroll-triggered animations
+- Year badges on hover
+- Intersection Observer implementation
 
-- HTML:
-```html
-<!--
-<form class="contact-form" id="contactForm" novalidate>
-    <div class="form-row">
-        <div class="form-group">
-            <label for="name">Full Name <span class="required">*</span></label>
-            <input type="text" id="name" name="name" placeholder="Your Full Name" required>
-            <div class="error-message"></div>
-        </div>
-        <div class="form-group">
-            <label for="email">Email Address <span class="required">*</span></label>
-            <input type="email" id="email" name="email" placeholder="name@example.com" required>
-            <div class="error-message"></div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="message">Message <span class="required">*</span></label>
-        <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
-        <div class="error-message"></div>
-    </div>
-    <button type="submit" class="submit-btn">Send Message</button>
-</form>
--->
+**Key Classes:**
+```javascript
+initTimelineAnimations()      // Scroll animations
+enhanceTimelineInteractivity() // Hover badges
 ```
+6. Quote Rotator Component
+**Location:** `index.html` (quote-rotator) | `styles.css`  (quote-rotator) | `script.js` (quote functions)
 
-- Validation Rules:
+**Features:**
+- 7 personal quotes
+- Auto-rotation every 8 seconds
+- Previous/next navigation
+- Pause on hover
+- Session persistence
 
+**Key Classes:**
+```javascript
+initQuoteRotator()    // Initialize rotator
+displayQuote()        // Show current quote
+startAutoRotate()     // Auto-rotation
+resetAutoRotate()     // Reset timer
+```
+7. Contact Form Component
+**Location:** `index.html` (contact section) | `styles.css`  (contact-form) | `script.js` (form functions)
+
+**Validation Rules:**
 | Field | Validation | Error Message |
 |-------|------------|---------------|
 | Name | Min 2 characters | "Please enter a valid name" |
 | Email | Regex pattern | "Please enter a valid email" |
 | Message | 10-1000 characters | "Message must be 10-1000 characters" |
 
+
+**Key Classes:**
+```javascript
+initContactForm()   // Form handler
+validateForm()      // Validation logic
+showFieldError()    // Display error
+showNotification()  // Success/error popup
+```
+
 ---
 
 ##  JavaScript Functions Reference
 
-1. Core Initialization Functions:
-
+1. Core Functions
 | Function | Purpose | Line |
 |----------|---------|------|
 | initThemeToggle() | Dark/light theme switching | 38 |
@@ -245,8 +205,7 @@ A responsive personal portfolio website built with vanilla HTML, CSS, and JavaSc
 | initSkillLevels() | Skill bar animations | 250 |
 | initProjectFilters() | Project filtering | 315 |
 
-2. Assignment 3 Functions:
-
+2. Assignment 3 Functions
 | Function | Purpose | Line |
 |----------|---------|------|
 | fetchGitHubRepos() | Fetches repositories from GitHub API | 700 |
@@ -260,161 +219,129 @@ A responsive personal portfolio website built with vanilla HTML, CSS, and JavaSc
 | initSessionTimer() | Manages real-time session timer | 950 |
 | debounce() | Performance optimization for rapid events | 975 |
 
+3. Assignment 4 Functions
+| Function | Purpose | Line |
+|----------|---------|------|
+| initQuoteRotator() | Quote rotator with auto-rotation | 1000 |
+| initTimelineAnimations() | Scroll-triggered timeline | 1050 |
+| enhanceTimelineInteractivity() | Year badges on hover | 1080 |
+
 ---
 
 ##  CSS Architecture
 
-1. CSS Variables:
-
-```css
-/*
+1. CSS Variables (Theming)
+```CSS
 :root {
+    /* Light theme */
     --primary-color: #2563eb;
     --secondary-color: #7c3aed;
-    --text-color: #1f2937;
     --bg-color: #ffffff;
-    --card-bg: #ffffff;
-    --border-color: #e5e7eb;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --text-color: #1f2937;
 }
 
 [data-theme="dark"] {
+    /* Dark theme */
     --primary-color: #60a5fa;
     --secondary-color: #a78bfa;
-    --text-color: #f3f4f6;
     --bg-color: #111827;
-    --card-bg: #1f2937;
-    --border-color: #374151;
+    --text-color: #f3f4f6;
 }
-*/
 ```
+2. Key Layouts
+| Layout | 	CSS Property | Usage |
+|--------|---------------|-------|
+| Projects Grid | grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) | Responsive project card |
+| Repos Grid | grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) | GitHub repo cards |
+| Stats Boxes | display: flex; justify-content: center; gap: 2rem | Centered stats boxes |
+| Timeline | position: relative; padding-left: 30px | Vertical timeline |
 
-2. Grid Layouts:
+3. Animations
+| Keyframe | Purpose | Duration |
+|----------|---------|----------|
+| fadeInUp | Fade in with upward motion | 0.6s |
+| bounce | Bouncing arrow in hero | 2s (infinite) |
+| shake | Form field error shake | 0.5s |
+| spin | Loading spinner rotation | 1s (infinite) |
+| slideIn | Notification slide in | 0.3s |
 
-```css
-/*
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-lg);
-}
+3. Responsive Breakpoints
+| Breakpoint | Target | Key Changes |
+|------------|--------|-------------|
+| 992px | Tablet | 2-column layouts, reduced padding |
+| 768px | Mobile | 	Hamburger menu, stacked layouts |
+| 480px | Small Mobile | Compact stats, smaller fonts |
+| 360px | Extra Small | Minimal padding, single column |
 
-.repos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: var(--spacing-lg);
-}
-
-.stats-bar {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    position: sticky;
-    top: 70px;
-    z-index: 99;
-}
-*/
-```
-
-3. Animation Keyframes:
-
-```css
-/*
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
-}
-*/
-```
 ---
 
-##  Performance Optimization
-```html
-<!--
-<img loading="lazy" src="assets/images/PFP.png" alt="Profile">
+## State Management
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+1. localStorage Items
+| Key | Value | Purpose |
+|-----|-------|---------|
+| theme | "light" / "dark" | Theme preference |
+| portfolioVisitCount | Number | Total visit count |
+| quizResult | JSON object | Quiz result with timestamp |
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+2. sessionStorage Items
+| Key | Value | Purpose |
+|-----|-------|---------|
+| sessionStarted | "true" | Track new session |
+| sessionStartTime | Timestamp | Calculate session duration |
+| currentQuoteIndex | Number | Current quote position |
 
-<link rel="preload" as="image" href="assets/images/PFP.png">
--->
-```
-
-```javascript
-/**
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const level = entry.target.getAttribute('data-level');
-            entry.target.style.width = level;
-        }
-    });
-}, { threshold: 0.5 });
- */
-```
 ---
 
-##  Accessibility Features
+## Performance Optimizations
 
-```html
-<!--
-<nav aria-label="Main navigation">
-<button aria-label="Toggle menu" aria-expanded="false">
-<div id="greeting" aria-live="polite">
-<footer role="contentinfo">
--->
-```
+| Technique | Implementation | Benefit |
+|-----------|----------------|---------|
+| Lazy Loading | loading="lazy" on images | Faster initial load |
+| Debouncing | debounce() function | Prevents excessive re-renders |
+| Intersection Observer | Skill bars, timeline items | 	Animations only when visible |
+| Preconnect | Google Fonts, CDN | Reduced DNS lookup time |
+| Preload | Hero image | Critical resource priority |
 
+---
 
-```css
-/*
-:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-}
+## Accessibility Features
 
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-*/
-```
+| Feature | Implementation | 
+|---------|----------------|
+| ARIA Labels | aria-label, aria-live, aria-expanded | 
+| Semantic HTML | nav, section, footer, main | 
+| Keyboard Navigation | Tab focus, Enter key, Escape to close | 
+| Reduced Motion | prefers-reduced-motion media query | 
+| Color Contrast | WCAG compliant (7:1 ratio) | 
+| Focus Indicators | :focus-visible outline | 
+
+---
+
+## Error Handling
+
+| Scenario | Handling | 
+|----------|----------|
+| GitHub API fails | Show error message with retry button | 
+| Form validation fails | Display specific field errors | 
+| Network offline | Show notification to user | 
+| localStorage unavailable | Fallback to memory | 
+| Image load fails | CSS background fallback | 
+
 ---
 
 ##  Troubleshooting Guide
 
-- Common Issues and Solutions:
-
 | Issue | Solution |
 |-------|----------|
-| GitHub repos not loading | Check console for errors, click retry button, verify username Wajza |
-| Filter dropdown empty | Ensure repos have language property, check API response |
-| Quiz result not showing | Check console, verify answer types match result keys |
-| Session timer resets on navigation | Timer is designed to reset on new session, normal behavior |
-| Theme not persisting | Enable localStorage in browser settings |
-| Images not loading | Verify images exist in assets/images/ folde |
-| Mobile menu not working | Check console for errors, verify hamburger selectors |
-| Form validation not showing| Ensure .error-message div exists after each input |
+| Stats boxes not visible | Add margin-top: 70px |
+| GitHub repos not loading | Click retry button, wait 1 hour |
+| Filter dropdown empty | Ensure repos have language property |
+| Theme not persisting | Enable in browser settings |
+| Mobile menu not working | Check console for errors |
+| Quiz result not showing | Verify quizQuestions structure |
+| Images not loading | Check assets/images/ folder |
+
 ---
 
 ##  References

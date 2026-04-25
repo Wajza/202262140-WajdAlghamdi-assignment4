@@ -4,119 +4,136 @@
 
 ## AI Tools Used & Use Cases
 
-**ChatGPT (GPT-4):**
-- **API Integration (GitHub):** AI helped generate the basic fetch setup and error handling. I added a retry button, better error messages, a loading spinner, and a dynamic language filter based on the repo data.
+| Tool | Use Case | Description |
+|------|----------|-------------|
+| **ChatGPT (GPT-4)** | Code Generation | Initial structure for GitHub API, quiz logic, timeline, quote rotator |
+| **ChatGPT (GPT-4)** | Debugging | Fixed filter/sort logic, positioning issues, timer bugs |
+| **ChatGPT (GPT-4)** | Code Review | Reviewed existing code, suggested performance optimizations |
+| **ChatGPT (GPT-4)** | Documentation | Structured technical documentation and AI usage report |
 
-- **Complex Logic (Filter + Sort):** AI suggested using filter() and sort(). I combined them properly and added debouncing so the page doesn’t re-render too often.
+### Specific Use Cases by Feature
 
-- **Complex Logic (Quiz):** AI gave a basic structure. I rewrote the questions to match developer paths, added a progress bar, saved results in localStorage, and showed personalized results.
-
-- **State Management:** AI explained localStorage and sessionStorage. I used them for a visit counter, session timer, theme saving, and quiz results.
-
-- **Performance:** AI suggested lazy loading and debouncing. I added Intersection Observer for animations, debounced inputs, lazy-loaded images, and added reduced motion support.
-
+| Feature | AI Assistance | My Modifications |
+|---------|--------------|------------------|
+| GitHub API | Fetch setup, error handling | Retry button, dynamic language filter, loading states |
+| Filter + Sort | Suggested filter() and sort() methods | Combined logic with debouncing |
+| Developer Quiz | Basic question structure | Weighted scoring, progress bar, localStorage |
+| State Management | Explained localStorage/sessionStorage | Visit counter, session timer, theme persistence |
+| Journey Timeline | Basic timeline structure | Personal milestones, hover badges, animations |
+| Quote Rotator | Auto-rotation concept | 7 personal quotes, navigation buttons |
+| Stats Boxes | Positioning suggestions | Fixed navbar overlap issues |
 
 ---
 
 ## Benefits & Challenges
 
-**Benefits:**
-- **Time Efficiency:** AI cut my dev time by about 60–70%. I finished everything in around 4 hours instead of 10+.
+### Benefits
 
-- **Learning Accelerator:** I learned API fetching, localStorage, sessionStorage, and combining filter + sort much quicker.
+| Benefit | Description |
+|---------|-------------|
+| ⏱️ **Time Efficiency** | Reduced development time by 60-70% |
+| 📚 **Learning Accelerator** | Quickly learned API fetching, storage APIs, array methods |
+| 💯 **Code Quality** | Implemented debouncing, loading states, error handling |
+| 🔧 **Problem Solving** | Helped debug complex logic and positioning issues |
 
-- **Code Quality:**	AI suggested good practices like debouncing, loading states, retry buttons, and accessibility improvements.
+### Challenges & Solutions
 
-- **Problem Solving:** AI helped me understand issues like filter/sort order, quiz logic errors, and timer bugs.
+| Challenge | Solution |
+|-----------|----------|
+| AI didn't match existing design patterns | Manually fixed styling inconsistencies |
+| Wrong variable names or syntax errors | Tested thoroughly and corrected each error |
+| Generic placeholder content | Replaced with personalized content (quotes, timeline) |
+| Stats boxes hidden behind navbar | Added margin-top calculations for fixed navbar |
+| Filter/Sort not working together | Rewrote logic to filter first, then sort |
 
-- **Documentation:** AI gave me a base template, which I edited to match my actual project and features.
-
-**Challenges and Limitations:**
-- **Context Understanding:** I didn’t always match my existing design, so I had to fix styling and structure.
-
-- **Code Accuracy:** Sometimes AI used wrong variables or had small logic mistakes, so I had to test everything.
-
-- **Generic Solutions:** I replaced placeholder text and basic quiz questions with my own content.
-
-- **Image Path Issues:** AI used generic image paths, so I updated them to match my project.
-
-- **Over-reliance Risk:**  I made sure I understood every line before using it.
 ---
 
 ## Learning Outcomes
 
-**Technical Skills Gained:**
-- **GitHub REST API Integration:** Fetch and display repo data, including names, stars, forks, and languages.
+### Technical Skills Gained
 
-- **Combined Filter + Sort Logic:** Always filter first, then sort for correct results.
+| Skill | What I Learned |
+|-------|----------------|
+| GitHub REST API | Fetch, display, and manipulate live repository data |
+| Filter + Sort Logic | Filter first, then sort for correct results |
+| localStorage | Persistent data across browser sessions |
+| sessionStorage | Session-based data (resets when tab closes) |
+| Debouncing | Prevent excessive function calls during rapid input |
+| Intersection Observer | Trigger animations only when elements are visible |
+| CSS Grid/Flexbox | Responsive layouts for all screen sizes |
+| CSS Custom Properties | Dynamic dark/light theme switching |
 
-- **localStorage for Persistent Data:** Used for visit counter, theme, and quiz results.
+### Key Concepts Mastered
 
-- **sessionStorage for Session Data:** Used for a real-time session timer.
+- ✅ API Integration with loading states and error handling
+- ✅ Combined filter + sort operations
+- ✅ Persistent vs session-based storage
+- ✅ Weighted scoring for quiz results
+- ✅ Mobile-first responsive design
+- ✅ ARIA accessibility attributes
 
-- **Debouncing for Performance:** Prevents too many updates when users interact quickly.
+### Workflow Improvements
 
-- **Intersection Observer for Scroll Animations:** Runs animations only when elements are visible.
-
-- **Error Handling for API Calls:** Used try/catch and added retry options.
-
-**Key Technical Concepts Learned:**
-- **API Integration:** Fetch data, show loading states, and handle errors properly.
-
-- **Filter + Sort Together:** Filter first, then sort.
-
-- **localStorage vs sessionStorage:** localStorage = permanent, sessionStorage = temporary.
-
-- **sessionStorage for Session Data:** racks user time on the site with a real-time timer; resets when the tab closes.
-
-- **Debouncing:** Wait before running functions to improve performance.
-
-- **Quiz Logic with Weighted Scoring:** Count answers and show the most common result.
-
-**Workflow Improvements:**
-
-- **Before AI:**
-I used to guess and randomly change code when something broke. It wasted time and caused more bugs.
-
-- **After AI:**
-Now I understand errors, fix them properly, and learn from them. Debugging is much faster and more structured.
+| Before AI | After AI |
+|-----------|----------|
+| Guessed fixes when code broke | Understand errors and fix properly |
+| Hours debugging simple issues | Identify issues faster with AI suggestions |
+| Repetitive manual coding | Generate boilerplate code efficiently |
+| Limited documentation | Well-structured documentation |
 
 ---
 
 ## Responsible Use & Modifications
 
-For every AI-generated suggestion, I followed this review process:
+### My Review Process
+
+For every AI-generated suggestion, I followed:
+
 1. **Generate** → Get AI suggestion
 2. **Analyze** → Understand what the code does
 3. **Test** → Run in browser to verify functionality
 4. **Modify** → Customize for my specific needs
 5. **Improve** → Add error handling, comments, optimizations
 
-**Specific Modifications Made:**
-| AI-Generated | Why I Changed It |
-|--------------|-------------------|
-| Generic GitHub username "octocat" | Match my actual GitHub account |
-| Basic fetch without error handling | Prevent crashes when API fails |
-| Hardcoded language filter options | Need dynamic options from API data |
-| Simple filter and sort separately | 	Need them to work together |
-| Generic quiz questions about "favorite language" | Need developer path questions |
-| Basic quiz result calculation | Need accurate weighted scoring |
-| No quiz progress bar | Need visual feedback for users |
-| No visit counter | Requirement for state management |
-| No session timer | Requirement for state management |
-| No debouncing on filters | Performance issues with rapid changes |
-| No Intersection Observer for skills | Animations run even when not visible |
-| Generic image paths like "profile.jpg" | Match my actual folder structure |
-| Basic form validation (empty check only) | Need better user experience |
-| No loading states for form submission | Users could submit multiple times |
-| Simple theme toggle without animation | Need more polished appearance |
-| No localStorage for theme preference | Theme resets on page refresh |
+### Specific Modifications Made
 
-**Academic Integrity Statement:**
-I confirm that:
-- ✅ All AI-generated code was reviewed and modified
-- ✅ I understand every line of code in this project
-- ✅ AI was used as a learning tool, not a replacement
-- ✅ All content accurately represents my work and identity
-- ✅ Image paths were corrected to match my folder structure
-- ✅ All personal information (name, ID, contact) is accurate
+| AI-Generated | Why I Changed It | My Improvement |
+|--------------|-------------------|----------------|
+| "octocat" username | Need my actual account | Changed to "Wajza" |
+| Basic fetch without error handling | Website would crash | Added try/catch + retry button |
+| Hardcoded language filters | Need dynamic options | Extract languages from API response |
+| Separate filter and sort | Need them together | Combined into one function |
+| Generic quiz questions | Need personal touch | Created developer path questions |
+| No progress bar | Need visual feedback | Added progress bar with percentage |
+| No visit counter | Assignment requirement | Implemented localStorage counter |
+| No session timer | Assignment requirement | Implemented sessionStorage timer |
+| No debouncing | Performance issues | Added debounce function |
+| Stats bar hidden | Positioning issue | Added margin-top fix |
+
+### What I Did NOT Change
+
+- ✅ Basic structure of functions
+- ✅ CSS variable system for theming
+- ✅ Event listener patterns
+- ✅ Async/await syntax
+
+## Academic Integrity Statement
+
+**I, Wajd Alghamdi, hereby confirm that:**
+
+| Statement | Confirmation |
+|-----------|--------------|
+| I have reviewed, tested, and understand every line of code in this project | ✅ |
+| All AI-generated code was reviewed and modified to fit my specific needs | ✅ |
+| No AI-generated code was used without full understanding | ✅ |
+| AI was used as a learning tool, not a replacement for my knowledge | ✅ |
+| All content accurately represents my work and personal identity | ✅ |
+| All personal information (name, ID, contact, images) is accurate | ✅ |
+| The journey timeline and quotes reflect my actual experiences and values | ✅ |
+| I can explain every function and style rule in this project | ✅ |
+
+**Signature:** *Wajd Alghamdi*
+
+<div align="center">
+  <i>AI assisted, human verified, student owned</i>
+</div>
