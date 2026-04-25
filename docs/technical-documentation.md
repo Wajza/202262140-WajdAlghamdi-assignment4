@@ -44,6 +44,7 @@ A responsive personal portfolio website built with vanilla HTML, CSS, and JavaSc
 
 ## File Structure
 
+```
 202262140-wajd-alghamdi-assignment4/
 ├── README.md # Project overview
 ├── index.html # Main entry point
@@ -64,12 +65,13 @@ A responsive personal portfolio website built with vanilla HTML, CSS, and JavaSc
 │ ├── slides.pdf # Presentation slides
 │ └── demo-video.mp4 # Video demo
 └── .gitignore
+```
 
 ---
 
 ## Component Documentation
 
-1. Navigation Component:
+**1. Navigation Component:**
 **Location:** `index.html` (lines 18-55) | `styles.css` (lines 84-170) | `script.js` (lines 38-108)
 
 **Features:**
@@ -86,7 +88,7 @@ A responsive personal portfolio website built with vanilla HTML, CSS, and JavaSc
 .nav-link      /* Individual links */
 ```
 
-2. Stats Boxes Component:
+**2. Stats Boxes Component:**
 **Location:** `index.html` (lines 57-83) | `styles.css` (stats-boxes section) | `script.js` (initVisitCounter, initSessionTimer)
 
 **Features:**
@@ -103,7 +105,7 @@ A responsive personal portfolio website built with vanilla HTML, CSS, and JavaSc
 .stats-box-number   /* Value display */
 .stats-box-label    /* Label text */
 ```
-3. GitHub Repositories Component
+**3. GitHub Repositories Component**
 **Location:** `index.html` (lines 200-230) | `styles.css` (github-section) | `script.js` (fetchGitHubRepos, filterAndSortRepos)
 
 **Features:**
@@ -119,7 +121,7 @@ populateLanguageFilter() // Dynamic dropdown
 displayRepos()          // Render cards
 filterAndSortRepos()    // Combined logic
 ```
-4. Developer Quiz Component
+**4. Developer Quiz Component**
 **Location:** `index.html` (lines 232-260) | `styles.css` (quiz-section) | `script.js` (quiz functions)
 
 **Features:**
@@ -135,7 +137,7 @@ showQuestion()   // Display current question
 showQuizResult() // Calculate and show result
 restartQuiz()    // Reset quiz
 ```
-5. Journey Timeline Component
+**5. Journey Timeline Component**
 **Location:** `index.html` (my-journey section) | `styles.css`  (journey-section) | `script.js` (timeline functions)
 
 **Features:**
@@ -149,7 +151,7 @@ restartQuiz()    // Reset quiz
 initTimelineAnimations()      // Scroll animations
 enhanceTimelineInteractivity() // Hover badges
 ```
-6. Quote Rotator Component
+**6. Quote Rotator Component**
 **Location:** `index.html` (quote-rotator) | `styles.css`  (quote-rotator) | `script.js` (quote functions)
 
 **Features:**
@@ -166,7 +168,7 @@ displayQuote()        // Show current quote
 startAutoRotate()     // Auto-rotation
 resetAutoRotate()     // Reset timer
 ```
-7. Contact Form Component
+**7. Contact Form Component**
 **Location:** `index.html` (contact section) | `styles.css`  (contact-form) | `script.js` (form functions)
 
 **Validation Rules:**
@@ -189,7 +191,7 @@ showNotification()  // Success/error popup
 
 ##  JavaScript Functions Reference
 
-1. Core Functions
+**1. Core Functions**
 | Function | Purpose | Line |
 |----------|---------|------|
 | initThemeToggle() | Dark/light theme switching | 38 |
@@ -205,7 +207,7 @@ showNotification()  // Success/error popup
 | initSkillLevels() | Skill bar animations | 250 |
 | initProjectFilters() | Project filtering | 315 |
 
-2. Assignment 3 Functions
+**2. Assignment 3 Functions**
 | Function | Purpose | Line |
 |----------|---------|------|
 | fetchGitHubRepos() | Fetches repositories from GitHub API | 700 |
@@ -219,7 +221,7 @@ showNotification()  // Success/error popup
 | initSessionTimer() | Manages real-time session timer | 950 |
 | debounce() | Performance optimization for rapid events | 975 |
 
-3. Assignment 4 Functions
+**3. Assignment 4 Functions**
 | Function | Purpose | Line |
 |----------|---------|------|
 | initQuoteRotator() | Quote rotator with auto-rotation | 1000 |
@@ -230,7 +232,7 @@ showNotification()  // Success/error popup
 
 ##  CSS Architecture
 
-1. CSS Variables (Theming)
+**1. CSS Variables (Theming)**
 ```CSS
 :root {
     /* Light theme */
@@ -248,7 +250,7 @@ showNotification()  // Success/error popup
     --text-color: #f3f4f6;
 }
 ```
-2. Key Layouts
+**2. Key Layouts**
 | Layout | 	CSS Property | Usage |
 |--------|---------------|-------|
 | Projects Grid | grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) | Responsive project card |
@@ -256,7 +258,7 @@ showNotification()  // Success/error popup
 | Stats Boxes | display: flex; justify-content: center; gap: 2rem | Centered stats boxes |
 | Timeline | position: relative; padding-left: 30px | Vertical timeline |
 
-3. Animations
+**3. Animations**
 | Keyframe | Purpose | Duration |
 |----------|---------|----------|
 | fadeInUp | Fade in with upward motion | 0.6s |
@@ -265,7 +267,7 @@ showNotification()  // Success/error popup
 | spin | Loading spinner rotation | 1s (infinite) |
 | slideIn | Notification slide in | 0.3s |
 
-3. Responsive Breakpoints
+**3. Responsive Breakpoints**
 | Breakpoint | Target | Key Changes |
 |------------|--------|-------------|
 | 992px | Tablet | 2-column layouts, reduced padding |
@@ -277,14 +279,14 @@ showNotification()  // Success/error popup
 
 ## State Management
 
-1. localStorage Items
+**1. localStorage Items**
 | Key | Value | Purpose |
 |-----|-------|---------|
 | theme | "light" / "dark" | Theme preference |
 | portfolioVisitCount | Number | Total visit count |
 | quizResult | JSON object | Quiz result with timestamp |
 
-2. sessionStorage Items
+**2. sessionStorage Items**
 | Key | Value | Purpose |
 |-----|-------|---------|
 | sessionStarted | "true" | Track new session |
