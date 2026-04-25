@@ -8,78 +8,16 @@
  * customized, tested, and improved by Wajd Alghamdi
  * 
  * ========================================================
- * ASSIGNMENT 3 REQUIREMENTS IMPLEMENTED
+ * ASSIGNMENT 4 - FINAL POLISHED VERSION
  * ========================================================
  * 
- * 1. API INTEGRATION (Requirement 2)
- *    - fetchGitHubRepos(): Fetches live data from GitHub REST API
- *    - populateLanguageFilter(): Dynamically populates filter from API
- *    - displayRepos(): Renders repositories with error handling
- *    - Retry button for failed API requests
- * 
- * 2. COMPLEX LOGIC (Requirement 3)
- *    - filterAndSortRepos(): Combined filter + sort functionality
- *    - Interactive quiz with 3 questions and weighted scoring
- *    - Conditional result display based on user answers
- *    - Personalized developer path recommendations
- * 
- * 3. STATE MANAGEMENT (Requirement 4)
- *    - initVisitCounter(): Persistent visit count (localStorage)
- *    - initSessionTimer(): Session duration (sessionStorage)
- *    - Theme persistence across browser sessions
- *    - Quiz result storage with timestamp
- * 
- * 4. PERFORMANCE OPTIMIZATIONS (Requirement 5)
- *    - debounce(): Prevents excessive filter/sort calculations
- *    - Lazy loading for images below the fold
- *    - Efficient DOM updates (no unnecessary reflows)
- *    - Intersection Observer for skill bar animations
- * 
- * ========================================================
- * ORIGINAL FEATURES MAINTAINED & IMPROVED
- * ========================================================
- * 
- * - Mobile menu with swipe gestures and keyboard (Escape) support
- * - Form validation with real-time feedback and regex patterns
- * - Smooth scrolling with offset for fixed navigation header
- * - Dynamic greeting message with typewriter effect
- * - Theme toggle with rotation animation and system preference detection
- * - Scroll spy for active navigation highlighting
- * - Back to top button with smooth behavior
- * - Newsletter form with email validation
- * - Network status detection (online/offline notifications)
- * 
- * ========================================================
- * CODE QUALITY STANDARDS FOLLOWED
- * ========================================================
- * 
- * - No inline styles - all styling via CSS classes
- * - No duplicate code - reusable functions (showNotification, etc.)
- * - Proper error handling for all async operations
- * - Consistent naming conventions (camelCase for functions/variables)
- * - Comprehensive comments for complex logic
- * - Global functions exposed only when necessary (onclick handlers)
- * - ES6+ features (async/await, arrow functions, template literals)
- * 
- * ========================================================
- * VERIFICATION & UNDERSTANDING
- * ========================================================
- * 
- * I have reviewed, tested, and understand every function in this file.
- * 
- * AI was used as a learning tool to understand:
- * - Async/await patterns for REST API calls
- * - localStorage and sessionStorage for state management
- * - Array methods (filter, sort, map, reduce, Set)
- * - Event delegation and debouncing techniques
- * - Intersection Observer API for lazy loading
- * - DOM manipulation best practices
- * 
- * No AI-generated code was used without:
- * - Full understanding of how it works
- * - Manual customization to fit my specific portfolio
- * - Testing in isolation before integration
- * - Adding appropriate error handling for edge cases
+ * New Features Added for Assignment 4:
+ * - Personal Quote Rotator with navigation and auto-rotation
+ * - Interactive Journey Timeline with animations
+ * - Year badge on timeline hover
+ * - Session persistence for quotes
+ * - Fixed GitHub filter functionality
+ * - Stats boxes support (visit counter, session timer, repo count)
  * 
  * ========================================================
  */
@@ -103,13 +41,12 @@ document.addEventListener('DOMContentLoaded', function() {
     initFormValidation();
     initLazyLoading();
     
-    // Assignment 3 Features
+    // Assignment 3 & 4 Features
     initAssignment3Features();
 });
 
 /**
  * Theme Toggle Functionality
- * Switches between light and dark mode and saves preference
  */
 function initThemeToggle() {
     const themeToggle = document.getElementById('themeToggle');
@@ -117,13 +54,11 @@ function initThemeToggle() {
     
     const icon = themeToggle.querySelector('i');
     
-    // Check for saved theme preference
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         document.documentElement.setAttribute('data-theme', savedTheme);
         updateThemeIcon(savedTheme === 'dark');
     } else {
-        // Check system preference
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         if (systemPrefersDark) {
             document.documentElement.setAttribute('data-theme', 'dark');
@@ -135,7 +70,6 @@ function initThemeToggle() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const isDark = currentTheme === 'dark';
         
-        // Toggle theme
         if (isDark) {
             document.documentElement.setAttribute('data-theme', 'light');
             localStorage.setItem('theme', 'light');
@@ -161,7 +95,6 @@ function initThemeToggle() {
 
 /**
  * Mobile Menu Functionality
- * Handles hamburger menu for mobile devices
  */
 function initMobileMenu() {
     const hamburger = document.querySelector('.hamburger');
@@ -171,34 +104,29 @@ function initMobileMenu() {
     
     if (!hamburger || !navMenu) return;
     
-    // Toggle menu
     hamburger.addEventListener('click', (e) => {
         e.stopPropagation();
         toggleMenu();
     });
     
-    // Close menu when clicking a link
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             closeMenu();
         });
     });
     
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
             closeMenu();
         }
     });
     
-    // Close menu on window resize
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768) {
             closeMenu();
         }
     });
     
-    // Handle swipe gestures for mobile
     let touchStartX = 0;
     let touchEndX = 0;
     
@@ -238,12 +166,10 @@ function initMobileMenu() {
         const swipeThreshold = 50;
         const swipeDistance = touchEndX - touchStartX;
         
-        // Swipe right to open menu (if on left edge)
         if (swipeDistance > swipeThreshold && touchStartX < 30 && !navMenu.classList.contains('active')) {
             toggleMenu();
         }
         
-        // Swipe left to close menu
         if (swipeDistance < -swipeThreshold && navMenu.classList.contains('active')) {
             closeMenu();
         }
@@ -252,7 +178,6 @@ function initMobileMenu() {
 
 /**
  * Smooth Scrolling
- * Enables smooth scroll to anchor links
  */
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
@@ -270,7 +195,6 @@ function initSmoothScroll() {
                     behavior: 'smooth'
                 });
                 
-                // Update URL without jumping
                 history.pushState(null, null, targetId);
             }
         });
@@ -278,8 +202,7 @@ function initSmoothScroll() {
 }
 
 /**
- * Greeting Message by Time of Day
- * Displays personalized greeting based on user's local time
+ * Greeting Message
  */
 function initGreetingMessage() {
     const greetingElement = document.getElementById('greeting');
@@ -291,7 +214,6 @@ function initGreetingMessage() {
     let greeting;
     let emoji;
     
-    // Time-based greeting
     if (hour < 12) {
         greeting = "Good morning";
         emoji = "☀️";
@@ -303,7 +225,6 @@ function initGreetingMessage() {
         emoji = "🌙";
     }
     
-    // Day-specific messages
     const dayMessages = {
         0: "Happy Sunday! ",
         1: "Happy Monday! ",
@@ -316,7 +237,6 @@ function initGreetingMessage() {
     
     const fullGreeting = `${emoji} ${greeting}! ${dayMessages[day]}I'm Wajd, a Software Engineer passionate about creating innovative solutions.`;
     
-    // Typewriter effect
     let i = 0;
     greetingElement.textContent = '';
     
@@ -333,7 +253,6 @@ function initGreetingMessage() {
 
 /**
  * Contact Form Handling
- * Validates and processes contact form submissions
  */
 function initContactForm() {
     const form = document.getElementById('contactForm');
@@ -342,7 +261,6 @@ function initContactForm() {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Get form data
         const formData = {
             name: document.getElementById('name').value.trim(),
             email: document.getElementById('email').value.trim(),
@@ -350,26 +268,20 @@ function initContactForm() {
             message: document.getElementById('message').value.trim()
         };
         
-        // Validate form
         if (!validateForm(formData)) {
             return;
         }
         
-        // Show loading state
         const submitBtn = form.querySelector('.submit-btn');
         const originalContent = submitBtn.innerHTML;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         submitBtn.disabled = true;
         
         try {
-            // Simulate form submission (replace with actual API call)
             await simulateSubmission();
-            
-            // Show success message
             showNotification('✨ Message sent successfully! I\'ll get back to you within 24 hours.', 'success');
             form.reset();
             
-            // Clear any error messages
             document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
             document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
             
@@ -377,7 +289,6 @@ function initContactForm() {
             console.error('Form submission error:', error);
             showNotification('❌ Oops! Something went wrong. Please try again or email me directly.', 'error');
         } finally {
-            // Reset button
             submitBtn.innerHTML = originalContent;
             submitBtn.disabled = false;
         }
@@ -386,29 +297,24 @@ function initContactForm() {
 
 /**
  * Form Validation
- * Validates all form fields
  */
 function validateForm(data) {
     let isValid = true;
     
-    // Clear previous errors
     document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
     document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
     
-    // Name validation
     if (data.name.length < 2) {
         showFieldError('name', 'Please enter a valid name (minimum 2 characters)');
         isValid = false;
     }
     
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email)) {
         showFieldError('email', 'Please enter a valid email address');
         isValid = false;
     }
     
-    // Message validation
     if (data.message.length < 10) {
         showFieldError('message', 'Message must be at least 10 characters long');
         isValid = false;
@@ -428,7 +334,6 @@ function validateForm(data) {
 
 /**
  * Show Field Error
- * Displays error message for a specific field
  */
 function showFieldError(fieldId, message) {
     const field = document.getElementById(fieldId);
@@ -449,7 +354,6 @@ function showFieldError(fieldId, message) {
  * Form Validation Initialization
  */
 function initFormValidation() {
-    // Add real-time validation
     const inputs = document.querySelectorAll('#contactForm input, #contactForm textarea');
     
     inputs.forEach(input => {
@@ -471,7 +375,6 @@ function initFormValidation() {
 
 /**
  * Simulate API Call
- * Mimics server submission
  */
 function simulateSubmission() {
     return new Promise((resolve) => {
@@ -481,16 +384,13 @@ function simulateSubmission() {
 
 /**
  * Show Notification
- * Displays user-friendly notifications
  */
 function showNotification(message, type) {
-    // Remove any existing notification
     const existingNotification = document.querySelector('.notification');
     if (existingNotification) {
         existingNotification.remove();
     }
     
-    // Create notification element
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.setAttribute('role', 'alert');
@@ -498,7 +398,6 @@ function showNotification(message, type) {
     
     document.body.appendChild(notification);
     
-    // Remove after 5 seconds
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease forwards';
         setTimeout(() => {
@@ -509,7 +408,6 @@ function showNotification(message, type) {
 
 /**
  * Scroll Spy
- * Highlights active navigation link based on scroll position
  */
 function initScrollSpy() {
     const sections = document.querySelectorAll('section[id]');
@@ -542,7 +440,6 @@ function initScrollSpy() {
 
 /**
  * Back to Top Button
- * Shows/hides and handles back to top functionality
  */
 function initBackToTop() {
     const backToTop = document.getElementById('backToTop');
@@ -566,7 +463,6 @@ function initBackToTop() {
 
 /**
  * Skill Levels Animation
- * Animates skill bars when in viewport
  */
 function initSkillLevels() {
     const skillLevels = document.querySelectorAll('.skill-level');
@@ -589,7 +485,6 @@ function initSkillLevels() {
 
 /**
  * Newsletter Form
- * Handles newsletter subscription
  */
 function initNewsletterForm() {
     const form = document.getElementById('newsletterForm');
@@ -603,7 +498,6 @@ function initNewsletterForm() {
         const submitBtn = form.querySelector('button');
         const originalContent = submitBtn.innerHTML;
         
-        // Validate email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             showNotification('Please enter a valid email address', 'error');
@@ -611,7 +505,6 @@ function initNewsletterForm() {
             return;
         }
         
-        // Show loading
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
         submitBtn.disabled = true;
         
@@ -629,8 +522,7 @@ function initNewsletterForm() {
 }
 
 /**
- * Typing Effect for Hero Section
- * Creates dynamic typing effect
+ * Typing Effect
  */
 function initTypingEffect() {
     const tagline = document.querySelector('.tagline');
@@ -648,13 +540,11 @@ function initTypingEffect() {
         }
     }
     
-    // Start typing after page load
     setTimeout(typeTagline, 1000);
 }
 
 /**
  * Project Filters
- * Filters projects by category
  */
 function initProjectFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -664,10 +554,7 @@ function initProjectFilters() {
     
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active class from all buttons
             filterButtons.forEach(b => b.classList.remove('active'));
-            
-            // Add active class to clicked button
             btn.classList.add('active');
             
             const filter = btn.getAttribute('data-filter');
@@ -687,7 +574,6 @@ function initProjectFilters() {
 
 /**
  * Lazy Loading Images
- * Improves page load performance
  */
 function initLazyLoading() {
     const images = document.querySelectorAll('img[loading="lazy"]');
@@ -709,15 +595,14 @@ function initLazyLoading() {
 
 /**
  * ========================================================
- * ASSIGNMENT 3 - ADVANCED FEATURES
+ * ASSIGNMENT 3 - GITHUB API INTEGRATION
  * ========================================================
  */
 
-// GitHub username
 const GITHUB_USERNAME = 'Wajza';
 
 /**
- * Fetch GitHub Repositories - API Integration
+ * Fetch GitHub Repositories
  */
 async function fetchGitHubRepos() {
     const container = document.getElementById('reposContainer');
@@ -731,26 +616,24 @@ async function fetchGitHubRepos() {
             </div>
         `;
         
-        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12`);
+        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=50`);
         
         if (!response.ok) {
             throw new Error(`GitHub API error: ${response.status}`);
         }
         
         const repos = await response.json();
+        const myRepos = repos.filter(repo => !repo.fork);
         
-        // Store repos in global state for filtering/sorting
-        window.githubRepos = repos;
+        window.githubRepos = myRepos;
         
-        // Populate language filter dropdown
-        populateLanguageFilter(repos);
+        console.log(`Fetched ${myRepos.length} repositories from GitHub`);
         
-        // Display repositories
-        displayRepos(repos);
+        populateLanguageFilter(myRepos);
+        displayRepos(myRepos);
         
-        // Update repo count in stats bar
         const repoCountSpan = document.getElementById('repoCount');
-        if (repoCountSpan) repoCountSpan.textContent = repos.length;
+        if (repoCountSpan) repoCountSpan.textContent = myRepos.length;
         
     } catch (error) {
         console.error('Failed to fetch repos:', error);
@@ -771,12 +654,12 @@ function populateLanguageFilter(repos) {
     const filterSelect = document.getElementById('repoFilter');
     if (!filterSelect) return;
     
-    // Extract unique languages
-    const languages = [...new Set(repos.map(repo => repo.language).filter(lang => lang))];
+    const languages = [...new Set(repos.map(repo => repo.language).filter(lang => lang !== null))];
     languages.sort();
     
-    // Clear existing options except "all"
-    filterSelect.innerHTML = '<option value="all">All Languages</option>';
+    console.log('Available languages:', languages);
+    
+    filterSelect.innerHTML = '<option value="all">🌐 All Languages</option>';
     
     languages.forEach(lang => {
         const option = document.createElement('option');
@@ -794,43 +677,50 @@ function displayRepos(repos) {
     if (!container) return;
     
     if (!repos || repos.length === 0) {
-        container.innerHTML = '<p class="error-message-repos">No repositories found.</p>';
+        container.innerHTML = '<p class="error-message-repos">No repositories found for the selected language.</p>';
         return;
     }
     
     container.innerHTML = repos.map(repo => `
-        <div class="repo-card" data-language="${repo.language || 'Unknown'}" data-stars="${repo.stargazers_count}" data-updated="${repo.updated_at}" data-name="${repo.name.toLowerCase()}">
+        <div class="repo-card">
             <h3 class="repo-name">
                 <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
-                    ${repo.name}
+                    <i class="fab fa-github"></i> ${repo.name}
                 </a>
             </h3>
             <p class="repo-description">${repo.description || 'No description provided.'}</p>
             <div class="repo-meta">
-                ${repo.language ? `<span class="repo-language"><i class="fas fa-code"></i> ${repo.language}</span>` : ''}
+                ${repo.language ? `<span class="repo-language"><i class="fas fa-code"></i> ${repo.language}</span>` : '<span class="repo-language"><i class="fas fa-code"></i> Unknown</span>'}
                 <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
                 <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+                <span><i class="fas fa-calendar-alt"></i> ${new Date(repo.updated_at).toLocaleDateString()}</span>
             </div>
         </div>
     `).join('');
 }
 
 /**
- * Filter and Sort Repositories - Complex Logic
+ * Filter and Sort Repositories
  */
 function filterAndSortRepos() {
-    if (!window.githubRepos) return;
+    if (!window.githubRepos || window.githubRepos.length === 0) {
+        console.log('No repos loaded yet');
+        return;
+    }
     
     let filtered = [...window.githubRepos];
     
-    // Apply filter
-    const filterValue = document.getElementById('repoFilter')?.value;
+    const filterSelect = document.getElementById('repoFilter');
+    const filterValue = filterSelect ? filterSelect.value : 'all';
+    
     if (filterValue && filterValue !== 'all') {
         filtered = filtered.filter(repo => repo.language === filterValue);
+        console.log(`Filtering by: ${filterValue}, found ${filtered.length} repos`);
     }
     
-    // Apply sort
-    const sortValue = document.getElementById('repoSort')?.value;
+    const sortSelect = document.getElementById('repoSort');
+    const sortValue = sortSelect ? sortSelect.value : 'updated';
+    
     switch (sortValue) {
         case 'stars':
             filtered.sort((a, b) => b.stargazers_count - a.stargazers_count);
@@ -848,8 +738,11 @@ function filterAndSortRepos() {
 }
 
 /**
- * Quiz Questions and Results
+ * ========================================================
+ * QUIZ SECTION
+ * ========================================================
  */
+
 const quizQuestions = [
     {
         question: "What's your favorite way to solve problems?",
@@ -952,7 +845,6 @@ function showQuestion() {
         </button>
     `).join('');
     
-    // Add event listeners to options
     document.querySelectorAll('.quiz-option-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             userAnswers.push(btn.dataset.type);
@@ -961,7 +853,6 @@ function showQuestion() {
         });
     });
     
-    // Update progress
     const progressPercent = (currentQuestion / quizQuestions.length) * 100;
     if (progressDiv) {
         progressDiv.innerHTML = `
@@ -982,13 +873,11 @@ function showQuizResult() {
     
     if (quizContent) quizContent.style.display = 'none';
     
-    // Count answer types
     const typeCounts = {};
     userAnswers.forEach(type => {
         typeCounts[type] = (typeCounts[type] || 0) + 1;
     });
     
-    // Find dominant type
     let dominantType = Object.keys(typeCounts).reduce((a, b) => typeCounts[a] > typeCounts[b] ? a : b, 'frontend');
     const result = quizResults[dominantType];
     
@@ -1003,7 +892,6 @@ function showQuizResult() {
         `;
     }
     
-    // Save result to localStorage (State Management)
     localStorage.setItem('quizResult', JSON.stringify({
         type: dominantType,
         timestamp: new Date().toISOString()
@@ -1024,7 +912,13 @@ function restartQuiz() {
 }
 
 /**
- * Visit Counter - State Management
+ * ========================================================
+ * STATE MANAGEMENT
+ * ========================================================
+ */
+
+/**
+ * Visit Counter
  */
 function initVisitCounter() {
     let visitCount = localStorage.getItem('portfolioVisitCount');
@@ -1043,10 +937,12 @@ function initVisitCounter() {
     if (visitCountSpan) {
         visitCountSpan.textContent = visitCount;
     }
+    
+    console.log('Visit count:', visitCount);
 }
 
 /**
- * Session Timer - State Management
+ * Session Timer
  */
 function initSessionTimer() {
     let startTime = sessionStorage.getItem('sessionStartTime');
@@ -1076,36 +972,200 @@ function initSessionTimer() {
 }
 
 /**
- * Debounce function for performance optimization
+ * ========================================================
+ * ASSIGNMENT 4 - INNOVATION FEATURES
+ * ========================================================
  */
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+
+const personalQuotes = [
+    { text: "Code is poetry written for both humans and machines. Every line tells a story of problem-solving.", author: "Wajd Alghamdi" },
+    { text: "The best code comes from collaboration, not isolation. Together, we build stronger solutions.", author: "Wajd Alghamdi" },
+    { text: "Proud to represent Saudi women in tech, one commit at a time. Diversity drives innovation.", author: "Wajd Alghamdi" },
+    { text: "Done is better than perfect, but both is the goal. Strive for excellence, deliver with pride.", author: "Wajd Alghamdi" },
+    { text: "Every bug is a lesson in disguise. Embrace challenges as opportunities to grow.", author: "Wajd Alghamdi" },
+    { text: "Technology is my canvas, code is my brush. Creating solutions that make a difference.", author: "Wajd Alghamdi" },
+    { text: "Learning never stops in tech. Stay curious, stay hungry, stay humble.", author: "Wajd Alghamdi" }
+];
+
+let currentQuoteIndex = 0;
+let quoteInterval = null;
+
+/**
+ * Initialize Quote Rotator
+ */
+function initQuoteRotator() {
+    const quoteText = document.getElementById('personalQuote');
+    const prevBtn = document.getElementById('prevQuote');
+    const nextBtn = document.getElementById('nextQuote');
+    const currentIndexSpan = document.getElementById('currentQuoteIndex');
+    const totalQuotesSpan = document.getElementById('totalQuotesCount');
+    
+    if (!quoteText) return;
+    
+    if (totalQuotesSpan) {
+        totalQuotesSpan.textContent = personalQuotes.length;
+    }
+    
+    const savedQuoteIndex = sessionStorage.getItem('currentQuoteIndex');
+    if (savedQuoteIndex !== null) {
+        currentQuoteIndex = parseInt(savedQuoteIndex);
+    }
+    
+    displayQuote(currentQuoteIndex);
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            currentQuoteIndex = (currentQuoteIndex - 1 + personalQuotes.length) % personalQuotes.length;
+            displayQuote(currentQuoteIndex);
+            animateQuoteChange();
+            resetAutoRotate();
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            currentQuoteIndex = (currentQuoteIndex + 1) % personalQuotes.length;
+            displayQuote(currentQuoteIndex);
+            animateQuoteChange();
+            resetAutoRotate();
+        });
+    }
+    
+    startAutoRotate();
+    
+    const quoteRotator = document.querySelector('.quote-rotator');
+    if (quoteRotator) {
+        quoteRotator.addEventListener('mouseenter', () => {
+            if (quoteInterval) {
+                clearInterval(quoteInterval);
+                quoteInterval = null;
+            }
+        });
+        
+        quoteRotator.addEventListener('mouseleave', () => {
+            startAutoRotate();
+        });
+    }
+    
+    function displayQuote(index) {
+        if (quoteText) {
+            quoteText.textContent = personalQuotes[index].text;
+        }
+        if (currentIndexSpan) {
+            currentIndexSpan.textContent = index + 1;
+        }
+        sessionStorage.setItem('currentQuoteIndex', index);
+    }
+    
+    function animateQuoteChange() {
+        if (quoteText) {
+            quoteText.style.animation = 'none';
+            quoteText.offsetHeight;
+            quoteText.style.animation = 'fadeInUp 0.5s ease';
+        }
+    }
+    
+    function startAutoRotate() {
+        if (quoteInterval) {
+            clearInterval(quoteInterval);
+        }
+        quoteInterval = setInterval(() => {
+            if (document.hasFocus()) {
+                currentQuoteIndex = (currentQuoteIndex + 1) % personalQuotes.length;
+                displayQuote(currentQuoteIndex);
+                animateQuoteChange();
+            }
+        }, 8000);
+    }
+    
+    function resetAutoRotate() {
+        if (quoteInterval) {
+            clearInterval(quoteInterval);
+        }
+        startAutoRotate();
+    }
 }
 
 /**
- * Initialize Assignment 3 Features
+ * Initialize Timeline Animations
+ */
+function initTimelineAnimations() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    if (!timelineItems.length) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateX(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    timelineItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-20px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(item);
+    });
+}
+
+/**
+ * Enhance Timeline Interactivity
+ */
+function enhanceTimelineInteractivity() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    timelineItems.forEach(item => {
+        const year = item.getAttribute('data-year');
+        const content = item.querySelector('.timeline-content');
+        
+        if (content && year) {
+            content.addEventListener('mouseenter', () => {
+                const existingBadge = content.querySelector('.year-badge');
+                if (!existingBadge) {
+                    const badge = document.createElement('div');
+                    badge.className = 'year-badge';
+                    badge.textContent = year;
+                    content.appendChild(badge);
+                }
+            });
+            
+            content.addEventListener('mouseleave', () => {
+                const badge = content.querySelector('.year-badge');
+                if (badge) {
+                    badge.remove();
+                }
+            });
+        }
+    });
+}
+
+/**
+ * Initialize Assignment 3 & 4 Features
  */
 function initAssignment3Features() {
     // GitHub API
     fetchGitHubRepos();
     
-    // Set up filter/sort listeners (with debounce for performance)
+    // Set up filter/sort listeners
     const filterSelect = document.getElementById('repoFilter');
     const sortSelect = document.getElementById('repoSort');
     
     if (filterSelect) {
-        filterSelect.addEventListener('change', () => filterAndSortRepos());
+        filterSelect.addEventListener('change', function() {
+            console.log('Filter changed to:', this.value);
+            filterAndSortRepos();
+        });
     }
+    
     if (sortSelect) {
-        sortSelect.addEventListener('change', () => filterAndSortRepos());
+        sortSelect.addEventListener('change', function() {
+            console.log('Sort changed to:', this.value);
+            filterAndSortRepos();
+        });
     }
     
     // Quiz
@@ -1114,20 +1174,22 @@ function initAssignment3Features() {
     // State Management
     initVisitCounter();
     initSessionTimer();
+    
+    // Innovation Features
+    initQuoteRotator();
+    initTimelineAnimations();
+    enhanceTimelineInteractivity();
 }
 
 /**
  * Page Load Performance Tracking
  */
 window.addEventListener('load', () => {
-    // Log performance metrics
     if (window.performance) {
         const perfData = window.performance.timing;
         const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
         console.log(`Page load time: ${pageLoadTime}ms`);
     }
-    
-    // Add loaded class to body for animations
     document.body.classList.add('loaded');
 });
 
@@ -1159,6 +1221,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Make functions available globally for onclick handlers
+// Make functions available globally
 window.fetchGitHubRepos = fetchGitHubRepos;
 window.restartQuiz = restartQuiz;
+window.filterAndSortRepos = filterAndSortRepos;

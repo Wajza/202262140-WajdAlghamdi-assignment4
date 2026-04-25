@@ -7,36 +7,40 @@
     ChatGPT (GPT-4), then manually 
     customized, tested, and improved by Wajd Alghamdi
 
-    === ASSIGNMENT 3 - ADVANCED FUNCTIONALITY ===
+    ========================================================
+    ASSIGNMENT 4 - FINAL POLISHED VERSION 
+    ========================================================
+
+    Modifications made for Assignment 4:
+    - Added "My Tech Journey" section with timeline and quote rotator (Innovation Feature)
+    - Updated navigation to include Journey and Quiz section links
+    - Changed stats bar to compact stats boxes at top of page
+    - Fixed GitHub filter functionality
+    - Fully responsive design with all styles in CSS, logic in JS
+    - No inline styles - complete separation of concerns
     
-    Modifications made for Assignment 3:
-    - Added GitHub API section with filter/sort controls
-    - Added interactive Developer Quiz component
-    - Added Stats Bar for state management (visit counter, session timer)
-    - Added responsive container for dynamic GitHub repos
-    - Updated navigation to include GitHub section link
-    - Maintained all accessibility features (ARIA labels, semantic HTML)
+    ========================================================
+    ASSIGNMENT 3 FEATURES MAINTAINED 
+    ========================================================
+
+    - GitHub API section with filter/sort controls
+    - Interactive Developer Quiz component
+    - Stats section for state management (visit counter, session timer)
+    - Responsive container for dynamic GitHub repos
     
-    === ORIGINAL FEATURES MAINTAINED ===
+    ========================================================
+    ORIGINAL FEATURES MAINTAINED 
+    ========================================================
+
     - Semantic HTML5 elements for accessibility
     - Customized content with personal information
     - Proper ARIA labels for screen readers
     - Responsive meta tags and Open Graph tags
     - Optimized resource loading with preconnect and defer
     
-    === VERIFICATION ===
-    I have reviewed, tested, and understand all code in this file.
-    AI was used as a learning tool to understand:
-    - Semantic HTML structure
-    - Accessibility best practices
-    - API integration patterns
-    - State management with localStorage
-    
-    No AI-generated code was used without full understanding
-    and manual customization to fit my specific needs.
-    
     ========================================================
 -->
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +48,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="description" content="Wajd Alghamdi - Software Engineer portfolio showcasing projects, skills, and experience in full-stack development">
-    <meta name="keywords" content="Software Engineer, Full Stack Developer, React, Node.js, Portfolio">
+    <meta name="keywords" content="Software Engineer, Full Stack Developer, React, Node.js, Portfolio, Saudi Developer">
     <meta name="author" content="Wajd Alghamdi">
     
     <!-- Open Graph / Social Media Meta Tags -->
@@ -91,9 +95,11 @@
             <ul class="nav-menu" role="list">
                 <li><a href="#home" class="nav-link" aria-current="page">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#my-journey" class="nav-link">Journey</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#github-repos" class="nav-link">GitHub</a></li>
+                <li><a href="#skill-quiz" class="nav-link">Quiz</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             
@@ -105,23 +111,37 @@
         </div>
     </nav>
 
-    <!-- Stats Bar - State Management -->
-    <div class="stats-bar" id="statsBar">
-        <div class="stats-container">
-            <div class="stat-item">
-                <i class="fas fa-user-friends"></i>
-                <span id="visitCount">Loading...</span>
-                <small>Total Visits</small>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-clock"></i>
-                <span id="sessionTimer">0s</span>
-                <small>Session Duration</small>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-code-branch"></i>
-                <span id="repoCount">0</span>
-                <small>GitHub Repos</small>
+        <!-- Stats Boxes - At the top of the page -->
+    <div class="stats-boxes" id="statsBoxes">
+        <div class="container">
+            <div class="stats-boxes-grid">
+                <div class="stats-box">
+                    <div class="stats-box-icon">
+                        <i class="fas fa-user-friends" aria-hidden="true"></i>
+                    </div>
+                    <div class="stats-box-info">
+                        <span class="stats-box-number" id="visitCount">0</span>
+                        <span class="stats-box-label">Total Visits</span>
+                    </div>
+                </div>
+                <div class="stats-box">
+                    <div class="stats-box-icon">
+                        <i class="fas fa-clock" aria-hidden="true"></i>
+                    </div>
+                    <div class="stats-box-info">
+                        <span class="stats-box-number" id="sessionTimer">0s</span>
+                        <span class="stats-box-label">Session Duration</span>
+                    </div>
+                </div>
+                <div class="stats-box">
+                    <div class="stats-box-icon">
+                        <i class="fas fa-code-branch" aria-hidden="true"></i>
+                    </div>
+                    <div class="stats-box-info">
+                        <span class="stats-box-number" id="repoCount">0</span>
+                        <span class="stats-box-label">GitHub Repos</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -175,6 +195,86 @@
                         <div class="info-item">
                             <i class="fas fa-project-diagram" aria-hidden="true"></i>
                             <span>10+ Projects Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Journey Section - Personal Touch (Innovation Feature) -->
+    <section id="my-journey" class="journey-section" aria-label="My Tech Journey">
+        <div class="container">
+            <h2 class="section-title">My Tech Journey</h2>
+            <div class="journey-container">
+                <!-- Quote Rotator Component -->
+                <div class="quote-rotator" id="quoteRotator">
+                    <div class="quote-icon">
+                        <i class="fas fa-quote-left" aria-hidden="true"></i>
+                    </div>
+                    <p id="personalQuote" class="quote-text" aria-live="polite">Loading my philosophy...</p>
+                    <div class="quote-navigation">
+                        <button class="quote-nav-btn" id="prevQuote" aria-label="Previous quote">←</button>
+                        <span class="quote-counter"><span id="currentQuoteIndex">1</span>/<span id="totalQuotesCount">0</span></span>
+                        <button class="quote-nav-btn" id="nextQuote" aria-label="Next quote">→</button>
+                    </div>
+                </div>
+
+                <!-- Timeline Component -->
+                <div class="timeline-container">
+                    <div class="timeline">
+                        <div class="timeline-item" data-year="2023">
+                            <div class="timeline-icon">💻</div>
+                            <div class="timeline-content">
+                                <h3>First Line of Code</h3>
+                                <p class="timeline-impact">Discovered my passion for problem-solving through Python</p>
+                                <span class="timeline-date">January 2023</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-year="2023">
+                            <div class="timeline-icon">🎓</div>
+                            <div class="timeline-content">
+                                <h3>Started Software Engineering Degree</h3>
+                                <p class="timeline-impact">Joined KFUPM to pursue my dream in tech</p>
+                                <span class="timeline-date">September 2023</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-year="2024">
+                            <div class="timeline-icon">🚀</div>
+                            <div class="timeline-content">
+                                <h3>First Full-Stack Application</h3>
+                                <p class="timeline-impact">Built Event Booking System using JavaFX and SQL</p>
+                                <span class="timeline-date">March 2024</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-year="2024">
+                            <div class="timeline-icon">👥</div>
+                            <div class="timeline-content">
+                                <h3>Joined Coding Community</h3>
+                                <p class="timeline-impact">Collaborated on 3 team projects and mentored juniors</p>
+                                <span class="timeline-date">September 2024</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-year="2025">
+                            <div class="timeline-icon">🎯</div>
+                            <div class="timeline-content">
+                                <h3>Professional Portfolio Launch</h3>
+                                <p class="timeline-impact">Showcasing 10+ projects and GitHub integration</p>
+                                <span class="timeline-date">January 2025</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-year="2026">
+                            <div class="timeline-icon">🌟</div>
+                            <div class="timeline-content">
+                                <h3>Full Stack Developer Ready</h3>
+                                <p class="timeline-impact">Actively seeking opportunities to build innovative solutions</p>
+                                <span class="timeline-date">Present</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -365,7 +465,7 @@
                 <div class="repo-filter-group">
                     <label for="repoFilter">Filter by Language:</label>
                     <select id="repoFilter" class="repo-filter-select">
-                        <option value="all">All Languages</option>
+                        <option value="all">🌐 All Languages</option>
                     </select>
                 </div>
                 <div class="repo-sort-group">
@@ -502,9 +602,11 @@
                     <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About</a></li>
-                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#my-journey">Journey</a></li>
                         <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
                         <li><a href="#github-repos">GitHub</a></li>
+                        <li><a href="#skill-quiz">Quiz</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -535,4 +637,5 @@
     <!-- JavaScript -->
     <script src="js/script.js" defer></script>
 </body>
+
 </html>
